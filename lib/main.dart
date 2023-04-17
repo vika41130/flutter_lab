@@ -1,4 +1,6 @@
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter/foundation.dart';
 
 void main() {
   runApp(const MyApp());
@@ -13,52 +15,44 @@ class MyApp extends StatelessWidget {
     return const CupertinoApp(
       debugShowCheckedModeBanner: false,
       theme: CupertinoThemeData(brightness: Brightness.light),
-      home: AlertDialog(),
+      home: CupertinoButtonExample(),
     );
   }
 }
 
-class AlertDialog extends StatefulWidget {
-  const AlertDialog({super.key});
+class CupertinoButtonExample extends StatefulWidget {
+  const CupertinoButtonExample({super.key});
 
   @override
-  State<AlertDialog> createState() => _AlertDialogState();
+  State<CupertinoButtonExample> createState() => _CupertinoButtonExampleState();
 }
 
-class _AlertDialogState extends State<AlertDialog> {
+class _CupertinoButtonExampleState extends State<CupertinoButtonExample> {
   @override
   Widget build(BuildContext context) {
     return CupertinoPageScaffold(
         navigationBar: const CupertinoNavigationBar(
-          middle: Text('CupertinoAlertDialog  Sample'),
+          middle: Text('CupertinoButton  Sample'),
         ),
         child: Center(
-          child: CupertinoButton(
-              child: const Text('CupertinoAlertDialog'),
-              onPressed: () => {_showAlertDialog(context)}),
-        ));
-  }
-
-  void _showAlertDialog(BuildContext context) {
-    showCupertinoModalPopup<void>(
-      context: context,
-      builder: (context) => CupertinoAlertDialog(
-        insetAnimationDuration: const Duration(milliseconds: 1000),
-        title: const Text('Alert'),
-        content: const Text('Proceed with destructive action?'),
-        actions: <CupertinoDialogAction>[
-          CupertinoDialogAction(
-            isDefaultAction: true,
-            onPressed: () => {Navigator.pop(context)},
-            child: const Text('No'),
-          ),
-          CupertinoDialogAction(
-            isDestructiveAction: true,
-            onPressed: () => {Navigator.pop(context)},
-            child: const Text('Yes'),
-          ),
-        ],
-      ),
-    );
+            child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: const <Widget>[
+            CupertinoButton(
+              onPressed: null,
+              child: Text('Disabled'),
+            ),
+            SizedBox(
+              height: 30,
+            ),
+            CupertinoButton.filled(
+              onPressed: null,
+              child: Text('Disabled'),
+            ),
+            SizedBox(
+              height: 30,
+            ),
+          ],
+        )));
   }
 }
