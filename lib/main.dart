@@ -13,73 +13,52 @@ class MyApp extends StatelessWidget {
     return const CupertinoApp(
       debugShowCheckedModeBanner: false,
       theme: CupertinoThemeData(brightness: Brightness.light),
-      home: Indicator(),
+      home: AlertDialog(),
     );
   }
 }
 
-class Indicator extends StatefulWidget {
-  const Indicator({super.key});
+class AlertDialog extends StatefulWidget {
+  const AlertDialog({super.key});
 
   @override
-  State<Indicator> createState() => _IndicatorState();
+  State<AlertDialog> createState() => _AlertDialogState();
 }
 
-class _IndicatorState extends State<Indicator> {
+class _AlertDialogState extends State<AlertDialog> {
   @override
   Widget build(BuildContext context) {
     return CupertinoPageScaffold(
         navigationBar: const CupertinoNavigationBar(
-          middle: Text('CupertinoActivityIndicator  Sample'),
+          middle: Text('CupertinoAlertDialog  Sample'),
         ),
         child: Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: [
-              Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: const <Widget>[
-                  CupertinoActivityIndicator(
-                    color: CupertinoColors.activeBlue,
-                    radius: 40,
-                    animating: true,
-                  ),
-                  SizedBox(
-                    height: 40,
-                  ),
-                  Text('Default'),
-                ],
-              ),
-            ],
-          ),
+          child: CupertinoButton(
+              child: const Text('CupertinoAlertDialog'),
+              onPressed: () => {_showAlertDialog(context)}),
         ));
   }
 
-  void _showActionSheet(BuildContext context) {
-    showCupertinoModalPopup(
-        context: context,
-        builder: (BuildContext context) => CupertinoActionSheet(
-              title: const Text('Title'),
-              message: const Text('Message'),
-              actions: <CupertinoActionSheetAction>[
-                CupertinoActionSheetAction(
-                    isDefaultAction: true,
-                    onPressed: () {
-                      Navigator.pop(context);
-                    },
-                    child: const Text('Default Action')),
-                CupertinoActionSheetAction(
-                    onPressed: () {
-                      Navigator.pop(context);
-                    },
-                    child: const Text('Action')),
-                CupertinoActionSheetAction(
-                    isDestructiveAction: true,
-                    onPressed: () {
-                      Navigator.pop(context);
-                    },
-                    child: const Text('Destructive Action'))
-              ],
-            ));
+  void _showAlertDialog(BuildContext context) {
+    showCupertinoModalPopup<void>(
+      context: context,
+      builder: (context) => CupertinoAlertDialog(
+        insetAnimationDuration: const Duration(milliseconds: 1000),
+        title: const Text('Alert'),
+        content: const Text('Proceed with destructive action?'),
+        actions: <CupertinoDialogAction>[
+          CupertinoDialogAction(
+            isDefaultAction: true,
+            onPressed: () => {Navigator.pop(context)},
+            child: const Text('No'),
+          ),
+          CupertinoDialogAction(
+            isDestructiveAction: true,
+            onPressed: () => {Navigator.pop(context)},
+            child: const Text('Yes'),
+          ),
+        ],
+      ),
+    );
   }
 }
