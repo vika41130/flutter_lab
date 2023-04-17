@@ -1,6 +1,5 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/foundation.dart';
 
 void main() {
   runApp(const MyApp());
@@ -15,44 +14,71 @@ class MyApp extends StatelessWidget {
     return const CupertinoApp(
       debugShowCheckedModeBanner: false,
       theme: CupertinoThemeData(brightness: Brightness.light),
-      home: CupertinoButtonExample(),
+      home: CupertinoContextMenuExample(),
     );
   }
 }
 
-class CupertinoButtonExample extends StatefulWidget {
-  const CupertinoButtonExample({super.key});
+class CupertinoContextMenuExample extends StatefulWidget {
+  const CupertinoContextMenuExample({super.key});
 
   @override
-  State<CupertinoButtonExample> createState() => _CupertinoButtonExampleState();
+  State<CupertinoContextMenuExample> createState() =>
+      _CupertinoContextMenuExampleState();
 }
 
-class _CupertinoButtonExampleState extends State<CupertinoButtonExample> {
+class _CupertinoContextMenuExampleState
+    extends State<CupertinoContextMenuExample> {
   @override
   Widget build(BuildContext context) {
     return CupertinoPageScaffold(
         navigationBar: const CupertinoNavigationBar(
-          middle: Text('CupertinoButton  Sample'),
+          middle: Text('CupertinoContextMenu  Sample'),
         ),
         child: Center(
-            child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: const <Widget>[
-            CupertinoButton(
-              onPressed: null,
-              child: Text('Disabled'),
-            ),
-            SizedBox(
-              height: 30,
-            ),
-            CupertinoButton.filled(
-              onPressed: null,
-              child: Text('Disabled'),
-            ),
-            SizedBox(
-              height: 30,
-            ),
-          ],
-        )));
+          child: SizedBox(
+            height: 100,
+            width: 100,
+            child: CupertinoContextMenu(
+                actions: <Widget>[
+                  CupertinoContextMenuAction(
+                    onPressed: () {
+                      Navigator.pop(context);
+                    },
+                    isDefaultAction: true,
+                    trailingIcon: CupertinoIcons.doc_on_clipboard_fill,
+                    child: const Text('Copy'),
+                  ),
+                  CupertinoContextMenuAction(
+                    onPressed: () {
+                      Navigator.pop(context);
+                    },
+                    trailingIcon: CupertinoIcons.share,
+                    child: const Text('Share'),
+                  ),
+                  CupertinoContextMenuAction(
+                    onPressed: () {
+                      Navigator.pop(context);
+                    },
+                    trailingIcon: CupertinoIcons.heart,
+                    child: const Text('Favorite'),
+                  ),
+                  CupertinoContextMenuAction(
+                    onPressed: () {
+                      Navigator.pop(context);
+                    },
+                    isDestructiveAction: true,
+                    trailingIcon: CupertinoIcons.delete,
+                    child: const Text('Delete'),
+                  ),
+                ],
+                child: Container(
+                  color: CupertinoColors.systemYellow,
+                  child: const FlutterLogo(
+                    size: 500,
+                  ),
+                )),
+          ),
+        ));
   }
 }
