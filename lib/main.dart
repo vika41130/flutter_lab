@@ -13,29 +13,45 @@ class MyApp extends StatelessWidget {
     return const CupertinoApp(
       debugShowCheckedModeBanner: false,
       theme: CupertinoThemeData(brightness: Brightness.light),
-      home: ActionSheet(),
+      home: Indicator(),
     );
   }
 }
 
-class ActionSheet extends StatefulWidget {
-  const ActionSheet({super.key});
+class Indicator extends StatefulWidget {
+  const Indicator({super.key});
 
   @override
-  State<ActionSheet> createState() => _ActionSheetState();
+  State<Indicator> createState() => _IndicatorState();
 }
 
-class _ActionSheetState extends State<ActionSheet> {
+class _IndicatorState extends State<Indicator> {
   @override
   Widget build(BuildContext context) {
     return CupertinoPageScaffold(
         navigationBar: const CupertinoNavigationBar(
-          middle: Text('CupertinoActionSheet Sample'),
+          middle: Text('CupertinoActivityIndicator  Sample'),
         ),
         child: Center(
-          child: CupertinoButton(
-              child: const Text('Open CupertinoActionSheet'),
-              onPressed: () => _showActionSheet(context)),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: const <Widget>[
+                  CupertinoActivityIndicator(
+                    color: CupertinoColors.activeBlue,
+                    radius: 40,
+                    animating: true,
+                  ),
+                  SizedBox(
+                    height: 40,
+                  ),
+                  Text('Default'),
+                ],
+              ),
+            ],
+          ),
         ));
   }
 
