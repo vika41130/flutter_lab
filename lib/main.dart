@@ -12,44 +12,43 @@ class MyApp extends StatelessWidget {
     return const CupertinoApp(
       debugShowCheckedModeBanner: false,
       theme: CupertinoThemeData(brightness: Brightness.light),
-      home: CupertinoScrollBar(),
+      home: SearchTextFieldExample(),
     );
   }
 }
 
-class CupertinoScrollBar extends StatefulWidget {
-  const CupertinoScrollBar({super.key});
+class SearchTextFieldExample extends StatefulWidget {
+  const SearchTextFieldExample({super.key});
 
   @override
-  State<CupertinoScrollBar> createState() => _CupertinoScrollBarState();
+  State<SearchTextFieldExample> createState() => _SearchTextFieldExampleState();
 }
 
-class _CupertinoScrollBarState extends State<CupertinoScrollBar> {
-  final ScrollController _controllerOne = ScrollController();
+class _SearchTextFieldExampleState extends State<SearchTextFieldExample> {
+  late TextEditingController textController;
+
+  @override
+  void initState() {
+    super.initState();
+    textController = TextEditingController(text: 'Initial text');
+  }
+
   @override
   Widget build(BuildContext context) {
     return CupertinoPageScaffold(
       navigationBar: const CupertinoNavigationBar(
-        middle: Text('CupertinoScrollbar Sample'),
+        middle: Text('CupertinoSearchTextField Sample'),
       ),
       child: Center(
-        child: CupertinoScrollbar(
-          thickness: 6.0,
-          thicknessWhileDragging: 10.0,
-          radius: const Radius.circular(34.0),
-          radiusWhileDragging: Radius.zero,
-          thumbVisibility: true,
-          controller: _controllerOne,
-          child: ListView.builder(
-            itemCount: 120,
-            itemBuilder: (context, index) {
-              return Center(
-                child: Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Text('Item $index'),
-                ),
-              );
-            },
+        child: Padding(
+          padding: const EdgeInsets.all(16.0),
+          child: CupertinoSearchTextField(
+            controller: textController,
+            placeholder: 'Search',
+            onChanged: (value) {},
+            onSubmitted: (value) {},
+            onTap: () {},
+            onSuffixTap: () {},
           ),
         ),
       ),
