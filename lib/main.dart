@@ -12,39 +12,49 @@ class MyApp extends StatelessWidget {
     return const CupertinoApp(
       debugShowCheckedModeBanner: false,
       theme: CupertinoThemeData(brightness: Brightness.light),
-      home: CupertinoSwitchExample(),
+      home: CupertinoTabBarExample(),
     );
   }
 }
 
-class CupertinoSwitchExample extends StatefulWidget {
-  const CupertinoSwitchExample({super.key});
+class CupertinoTabBarExample extends StatefulWidget {
+  const CupertinoTabBarExample({super.key});
 
   @override
-  State<CupertinoSwitchExample> createState() => _CupertinoSwitchExampleState();
+  State<CupertinoTabBarExample> createState() => _CupertinoTabBarExampleState();
 }
 
-class _CupertinoSwitchExampleState extends State<CupertinoSwitchExample> {
-  bool switchValue = true;
+class _CupertinoTabBarExampleState extends State<CupertinoTabBarExample> {
   @override
   Widget build(BuildContext context) {
-    return CupertinoPageScaffold(
-      navigationBar: const CupertinoNavigationBar(
-        middle: Text('CupertinoSwitch Sample'),
+    return CupertinoTabScaffold(
+      tabBar: CupertinoTabBar(
+        items: const <BottomNavigationBarItem>[
+          BottomNavigationBarItem(
+              icon: Icon(CupertinoIcons.star_fill), label: 'Favorites'),
+          BottomNavigationBarItem(
+            icon: Icon(CupertinoIcons.clock_solid),
+            label: 'Recents',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(CupertinoIcons.person_alt_circle_fill),
+            label: 'Contacts',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(CupertinoIcons.circle_grid_3x3_fill),
+            label: 'Keypad',
+          ),
+        ],
       ),
-      child: Center(
-        child: CupertinoSwitch(
-          activeColor: CupertinoColors.activeBlue,
-          trackColor: CupertinoColors.systemGrey,
-          thumbColor: CupertinoColors.activeOrange,
-          value: switchValue,
-          onChanged: (value) {
-            setState(() {
-              switchValue = value;
-            });
+      tabBuilder: (context, index) {
+        return CupertinoTabView(
+          builder: (context) {
+            return Center(
+              child: Text('Content of tab $index'),
+            );
           },
-        ),
-      ),
+        );
+      },
     );
   }
 }
