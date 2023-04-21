@@ -1,5 +1,13 @@
 import 'package:flutter/cupertino.dart';
 
+enum Sky { midnight, viridian, cerulean }
+
+Map<Sky, Color> skyColors = <Sky, Color>{
+  Sky.midnight: const Color(0xff191970),
+  Sky.viridian: const Color(0xff40826d),
+  Sky.cerulean: const Color(0xff007ba7),
+};
+
 void main() {
   runApp(const MyApp());
 }
@@ -12,44 +20,61 @@ class MyApp extends StatelessWidget {
     return const CupertinoApp(
       debugShowCheckedModeBanner: false,
       theme: CupertinoThemeData(brightness: Brightness.light),
-      home: SearchTextFieldExample(),
+      home: SegmentedControlExample(),
     );
   }
 }
 
-class SearchTextFieldExample extends StatefulWidget {
-  const SearchTextFieldExample({super.key});
+class SegmentedControlExample extends StatefulWidget {
+  const SegmentedControlExample({super.key});
 
   @override
-  State<SearchTextFieldExample> createState() => _SearchTextFieldExampleState();
+  State<SegmentedControlExample> createState() =>
+      _SegmentedControlExampleState();
 }
 
-class _SearchTextFieldExampleState extends State<SearchTextFieldExample> {
-  late TextEditingController textController;
+class _SegmentedControlExampleState extends State<SegmentedControlExample> {
+  Sky _selectedSegment = Sky.midnight;
 
   @override
   void initState() {
     super.initState();
-    textController = TextEditingController(text: 'Initial text');
   }
 
   @override
   Widget build(BuildContext context) {
     return CupertinoPageScaffold(
-      navigationBar: const CupertinoNavigationBar(
-        middle: Text('CupertinoSearchTextField Sample'),
+      backgroundColor: skyColors[_selectedSegment],
+      navigationBar: CupertinoNavigationBar(
+        middle: CupertinoSegmentedControl<Sky>(
+          padding: const EdgeInsets.symmetric(horizontal: 12),
+          selectedColor: skyColors[_selectedSegment],
+          groupValue: _selectedSegment,
+          onValueChanged: (value) {
+            setState(() {
+              _selectedSegment = value;
+            });
+          },
+          children: const <Sky, Widget>{
+            Sky.midnight: Padding(
+              padding: EdgeInsets.symmetric(horizontal: 20),
+              child: Text('Midnight'),
+            ),
+            Sky.viridian: Padding(
+              padding: EdgeInsets.symmetric(horizontal: 20),
+              child: Text('Viridian'),
+            ),
+            Sky.cerulean: Padding(
+              padding: EdgeInsets.symmetric(horizontal: 20),
+              child: Text('Cerulean'),
+            ),
+          },
+        ),
       ),
       child: Center(
-        child: Padding(
-          padding: const EdgeInsets.all(16.0),
-          child: CupertinoSearchTextField(
-            controller: textController,
-            placeholder: 'Search',
-            onChanged: (value) {},
-            onSubmitted: (value) {},
-            onTap: () {},
-            onSuffixTap: () {},
-          ),
+        child: Text(
+          'Selected Segment ${_selectedSegment.name}',
+          style: const TextStyle(color: CupertinoColors.white),
         ),
       ),
     );
