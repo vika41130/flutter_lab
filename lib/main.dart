@@ -1,88 +1,86 @@
 import 'package:flutter/cupertino.dart';
 
-void main() => runApp(const CupertinoListSectionInsetApp());
+void main() {
+  runApp(const MyApp());
+}
 
-class CupertinoListSectionInsetApp extends StatelessWidget {
-  const CupertinoListSectionInsetApp({super.key});
-
-  static const String _title = 'Flutter Code Sample';
-
+class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return const CupertinoApp(
-      title: _title,
-      home: MyStatelessWidget(),
+      debugShowCheckedModeBanner: false,
+      theme: CupertinoThemeData(brightness: Brightness.light),
+      home: TimerPickerExample(),
     );
   }
 }
 
-class MyStatelessWidget extends StatelessWidget {
-  const MyStatelessWidget({super.key});
+class TimerPickerExample extends StatefulWidget {
+  const TimerPickerExample({super.key});
+
+  @override
+  State<TimerPickerExample> createState() => _TimerPickerExampleState();
+}
+
+class _TimerPickerExampleState extends State<TimerPickerExample> {
+  Duration duration = const Duration(hours: 1, minutes: 23);
+  void _showDialog(Widget child) {
+    showCupertinoModalPopup<void>(
+        context: context,
+        builder: (BuildContext context) => Container(
+              height: 216,
+              padding: const EdgeInsets.only(top: 6.0),
+              // The bottom margin is provided to align the popup above the system
+              // navigation bar.
+              margin: EdgeInsets.only(
+                bottom: MediaQuery.of(context).viewInsets.bottom,
+              ),
+              // Provide a background color for the popup.
+              color: CupertinoColors.systemBackground.resolveFrom(context),
+              // Use a SafeArea widget to avoid system overlaps.
+              child: SafeArea(
+                top: false,
+                child: child,
+              ),
+            ));
+  }
 
   @override
   Widget build(BuildContext context) {
     return CupertinoPageScaffold(
-      child: CupertinoListSection.insetGrouped(
-        header: const Text('My Reminders'),
-        children: <CupertinoListTile>[
-          CupertinoListTile.notched(
-            title: const Text('Open pull request'),
-            leading: Container(
-              width: double.infinity,
-              height: double.infinity,
-              color: CupertinoColors.activeGreen,
-            ),
-            trailing: const CupertinoListTileChevron(),
-            onTap: () => Navigator.of(context).push(
-              CupertinoPageRoute<void>(
-                builder: (BuildContext context) {
-                  return const _SecondPage(text: 'Open pull request');
-                },
-              ),
-            ),
-          ),
-          CupertinoListTile.notched(
-            title: const Text('Push to master'),
-            leading: Container(
-              width: double.infinity,
-              height: double.infinity,
-              color: CupertinoColors.systemRed,
-            ),
-            additionalInfo: const Text('Not available'),
-          ),
-          CupertinoListTile.notched(
-            title: const Text('View last commit'),
-            leading: Container(
-              width: double.infinity,
-              height: double.infinity,
-              color: CupertinoColors.activeOrange,
-            ),
-            additionalInfo: const Text('12 days ago'),
-            trailing: const CupertinoListTileChevron(),
-            onTap: () => Navigator.of(context).push(
-              CupertinoPageRoute<void>(
-                builder: (BuildContext context) {
-                  return const _SecondPage(text: 'Last commit');
-                },
-              ),
-            ),
-          ),
-        ],
+      navigationBar: const CupertinoNavigationBar(
+        middle: Text('CupertinoTimerPicker Sample'),
       ),
-    );
-  }
-}
-
-class _SecondPage extends StatelessWidget {
-  const _SecondPage({required this.text});
-
-  final String text;
-
-  @override
-  Widget build(BuildContext context) {
-    return CupertinoPageScaffold(
-      child: Center(
-        child: Text(text),
+      child: DefaultTextStyle(
+        style: TextStyle(
+          color: CupertinoColors.label.resolveFrom(context),
+          fontSize: 22.0,
+        ),
+        child: Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              const Text('Timer'),
+              CupertinoButton(
+                onPressed: () => _showDialog(CupertinoTimerPicker(
+                  mode: CupertinoTimerPickerMode.hms,
+                  initialTimerDuration: duration,
+                  onTimerDurationChanged: (value) {
+                    setState(() {
+                      duration = value;
+                    });
+                  },
+                )),
+                child: Text(
+                  '$duration',
+                  style: const TextStyle(fontSize: 22),
+                ),
+              )
+            ],
+          ),
+        ),
       ),
     );
   }
