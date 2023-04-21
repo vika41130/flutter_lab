@@ -4,6 +4,14 @@ void main() {
   runApp(const MyApp());
 }
 
+enum Sky { midnight, viridian, cerulean }
+
+Map<Sky, Color> skyColors = <Sky, Color>{
+  Sky.midnight: const Color(0xff191970),
+  Sky.viridian: const Color(0xff40826d),
+  Sky.cerulean: const Color(0xff007ba7),
+};
+
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
   // This widget is the root of your application.
@@ -12,70 +20,67 @@ class MyApp extends StatelessWidget {
     return const CupertinoApp(
       debugShowCheckedModeBanner: false,
       theme: CupertinoThemeData(brightness: Brightness.light),
-      home: CupertinoSliderExample(),
+      home: SegmentedControlExample(),
     );
   }
 }
 
-class CupertinoSliderExample extends StatefulWidget {
-  const CupertinoSliderExample({super.key});
+class SegmentedControlExample extends StatefulWidget {
+  const SegmentedControlExample({super.key});
 
   @override
-  State<CupertinoSliderExample> createState() => _CupertinoSliderExampleState();
+  State<SegmentedControlExample> createState() =>
+      _SegmentedControlExampleState();
 }
 
-class _CupertinoSliderExampleState extends State<CupertinoSliderExample> {
-  double _currentSliderValue = 0.0;
-  String? _sliderStatus;
+class _SegmentedControlExampleState extends State<SegmentedControlExample> {
+  Sky _selectedSegment = Sky.midnight;
 
   @override
   Widget build(BuildContext context) {
     return CupertinoPageScaffold(
-      navigationBar: const CupertinoNavigationBar(
-        middle: Text('CupertinoSlider Sample'),
+      backgroundColor: skyColors[_selectedSegment],
+      navigationBar: CupertinoNavigationBar(
+        middle: CupertinoSlidingSegmentedControl<Sky>(
+          backgroundColor: CupertinoColors.systemGrey2,
+          thumbColor: skyColors[_selectedSegment]!,
+          groupValue: _selectedSegment,
+          onValueChanged: (Sky? value) {
+            if (value != null) {
+              setState(() {
+                _selectedSegment = value;
+              });
+            }
+          },
+          children: const <Sky, Widget>{
+            Sky.midnight: Padding(
+              padding: EdgeInsets.symmetric(horizontal: 20),
+              child: Text(
+                'Midnight',
+                style: TextStyle(color: CupertinoColors.white),
+              ),
+            ),
+            Sky.viridian: Padding(
+              padding: EdgeInsets.symmetric(horizontal: 20),
+              child: Text(
+                'Viridian',
+                style: TextStyle(color: CupertinoColors.white),
+              ),
+            ),
+            Sky.cerulean: Padding(
+              padding: EdgeInsets.symmetric(horizontal: 20),
+              child: Text(
+                'Cerulean',
+                style: TextStyle(color: CupertinoColors.white),
+              ),
+            ),
+          },
+        ),
       ),
       child: Center(
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: <Widget>[
-            // Display the current slider value.
-            Text('$_currentSliderValue'),
-            CupertinoSlider(
-              key: const Key('slider'),
-              value: _currentSliderValue,
-              // This allows the slider to jump between divisions.
-              // If null, the slide movement is continuous.
-              divisions: 5,
-              // The maximum slider value
-              max: 100,
-              activeColor: CupertinoColors.systemRed,
-              thumbColor: CupertinoColors.systemIndigo,
-              // This is called when sliding is started.
-              onChangeStart: (double value) {
-                setState(() {
-                  _sliderStatus = 'Sliding';
-                });
-              },
-              // This is called when sliding has ended.
-              onChangeEnd: (double value) {
-                setState(() {
-                  _sliderStatus = 'Finished sliding';
-                });
-              },
-              // This is called when slider value is changed.
-              onChanged: (double value) {
-                setState(() {
-                  _currentSliderValue = value;
-                });
-              },
-            ),
-            Text(
-              _sliderStatus ?? '',
-              style: CupertinoTheme.of(context).textTheme.textStyle.copyWith(
-                    fontSize: 12,
-                  ),
-            ),
-          ],
+        child: Text(
+          'Selected Segment: ${_selectedSegment.name}',
+          style: const TextStyle(color: CupertinoColors.white),
         ),
       ),
     );
