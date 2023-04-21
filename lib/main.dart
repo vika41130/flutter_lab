@@ -1,66 +1,88 @@
 import 'package:flutter/cupertino.dart';
 
-void main() {
-  runApp(const MyApp());
-}
+void main() => runApp(const CupertinoListSectionInsetApp());
 
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
-  // This widget is the root of your application.
+class CupertinoListSectionInsetApp extends StatelessWidget {
+  const CupertinoListSectionInsetApp({super.key});
+
+  static const String _title = 'Flutter Code Sample';
+
   @override
   Widget build(BuildContext context) {
     return const CupertinoApp(
-      debugShowCheckedModeBanner: false,
-      theme: CupertinoThemeData(brightness: Brightness.light),
-      home: CupertinoTextFieldExample(),
+      title: _title,
+      home: MyStatelessWidget(),
     );
   }
 }
 
-class CupertinoTextFieldExample extends StatefulWidget {
-  const CupertinoTextFieldExample({super.key});
-
-  @override
-  State<CupertinoTextFieldExample> createState() =>
-      _CupertinoTextFieldExampleState();
-}
-
-class _CupertinoTextFieldExampleState extends State<CupertinoTextFieldExample> {
-  late TextEditingController _textController;
-  @override
-  void initState() {
-    super.initState();
-    _textController = TextEditingController(text: 'initial text');
-  }
-
-  @override
-  void dispose() {
-    _textController.dispose();
-    super.dispose();
-  }
+class MyStatelessWidget extends StatelessWidget {
+  const MyStatelessWidget({super.key});
 
   @override
   Widget build(BuildContext context) {
     return CupertinoPageScaffold(
-      navigationBar: const CupertinoNavigationBar(
-        middle: Text('CupertinoTextField Sample'),
+      child: CupertinoListSection.insetGrouped(
+        header: const Text('My Reminders'),
+        children: <CupertinoListTile>[
+          CupertinoListTile.notched(
+            title: const Text('Open pull request'),
+            leading: Container(
+              width: double.infinity,
+              height: double.infinity,
+              color: CupertinoColors.activeGreen,
+            ),
+            trailing: const CupertinoListTileChevron(),
+            onTap: () => Navigator.of(context).push(
+              CupertinoPageRoute<void>(
+                builder: (BuildContext context) {
+                  return const _SecondPage(text: 'Open pull request');
+                },
+              ),
+            ),
+          ),
+          CupertinoListTile.notched(
+            title: const Text('Push to master'),
+            leading: Container(
+              width: double.infinity,
+              height: double.infinity,
+              color: CupertinoColors.systemRed,
+            ),
+            additionalInfo: const Text('Not available'),
+          ),
+          CupertinoListTile.notched(
+            title: const Text('View last commit'),
+            leading: Container(
+              width: double.infinity,
+              height: double.infinity,
+              color: CupertinoColors.activeOrange,
+            ),
+            additionalInfo: const Text('12 days ago'),
+            trailing: const CupertinoListTileChevron(),
+            onTap: () => Navigator.of(context).push(
+              CupertinoPageRoute<void>(
+                builder: (BuildContext context) {
+                  return const _SecondPage(text: 'Last commit');
+                },
+              ),
+            ),
+          ),
+        ],
       ),
+    );
+  }
+}
+
+class _SecondPage extends StatelessWidget {
+  const _SecondPage({required this.text});
+
+  final String text;
+
+  @override
+  Widget build(BuildContext context) {
+    return CupertinoPageScaffold(
       child: Center(
-        child: CupertinoTextField(
-          controller: _textController,
-          placeholder: 'Enter name',
-          prefix: const Text(
-            'Name',
-            style: TextStyle(fontWeight: FontWeight.bold),
-          ),
-          decoration: const BoxDecoration(),
-          suffix: CupertinoButton(
-            child: const Icon(CupertinoIcons.delete),
-            onPressed: () {
-              _textController.clear();
-            },
-          ),
-        ),
+        child: Text(text),
       ),
     );
   }
