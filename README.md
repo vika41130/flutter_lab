@@ -15,5 +15,15 @@ For help getting started with Flutter development, view the
 [online documentation](https://docs.flutter.dev/), which offers tutorials,
 samples, guidance on mobile development, and a full API reference.
 
-## next
-**http**
+## bloc
+- Bloc is event-driven
+
+### Cubit vs Bloc
+#### Cubit
+- Cubit is simple
+- Cubit needs state and function
+- Bloc needs state, event and event handler
+- Cubit is less code involved
+##### Bloc
+- Traceability: know state and source of event
+- reactive operators to transform event: using transformer
