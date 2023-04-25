@@ -27,3 +27,5 @@ samples, guidance on mobile development, and a full API reference.
 ##### Bloc
 - Traceability: know state and source of event
 - reactive operators to transform event: using transformer
+- look up: context.read<BlocA>(); or BlocProvider.of<BlocA>(context);
+- create: new instance BlocProvider() or reuse existing instance BlocProvider.value()
