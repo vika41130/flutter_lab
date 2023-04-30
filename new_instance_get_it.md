@@ -1,0 +1,3 @@
+```
+GetIt myOwnInstance = GetIt.asNewInstance();
+```
