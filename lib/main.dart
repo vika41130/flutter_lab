@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_lab/models/models_index.dart';
+
+import 'get_it_set_up.dart';
 
 void main() {
+  setUpGetIt();
   runApp(const MyApp());
 }
 
@@ -35,8 +39,37 @@ class _MyHomePageState extends State<MyHomePage> {
       appBar: AppBar(
         title: Text(widget.title),
       ),
-      body: const Center(
-        child: Text('Flutter Lab'),
+      body: Center(
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Expanded(
+              child: IconButton(
+                onPressed: () {
+                  getIt<CountStream>().decreaseCount();
+                },
+                icon: const Icon(Icons.remove)
+              ),
+            ),
+            StreamBuilder(
+              stream: getIt<CountStream>().counterStream,
+              builder: (context, snapshot) {
+                if (snapshot.hasData) {
+                  return Text('${getIt<CountStream>().count}', style: const TextStyle(fontSize: 40),);
+                }
+                return const CircularProgressIndicator();
+              }
+            ),
+            Expanded(
+              child: IconButton(
+                onPressed: () {
+                  getIt<CountStream>().increaseCount();
+                },
+                icon: const Icon(Icons.add)
+              ),
+            )
+          ],
+        ),
       ),
     );
   }

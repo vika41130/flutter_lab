@@ -1,19 +1,11 @@
-# flutter_lab
-
-A new Flutter project.
-
-## Getting Started
-
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
-
-## RoadMap
-- https://roadmap.sh/flutter
+#### purpose
+##### service locator
+- access instance instead InheritedWidget and Provider
+##### typical usage
+- access instance of REST API or database
+- access instance of View/Model/Manager/BloC
+##### strength
+- extremely fast
+- doesn't clutter widget tree
+##### get_it_mixin
+- state management solution
