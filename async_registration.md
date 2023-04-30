@@ -7,7 +7,8 @@
 - getIt.allReady(): return Future<void> wait all async initialization finished
 
 ##### code example
-  `class RestService {
+```
+  class RestService {
     Future<RestService> init() async {
       Future.delayed(Duration(seconds: 1));
       return this;
@@ -41,4 +42,5 @@
         } else {
           return CircularProgressIndicator();
         }
-      });`
+      });
+```
