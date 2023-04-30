@@ -24,3 +24,18 @@
       () => AppModelImplmentation(),
       dependsOn: [InitDependency(RestService, instanceName:"rest1")]);
 ```
+- signalReady if dependsOn not enough
+- use isReady to check
+```
+class ConfigService {
+  ConfigService()
+  {
+    init();
+  }
+  Future init() async {
+    // do your async initialisation...
+
+    GetIt.instance.signalReady(this);
+  }
+}
+```
