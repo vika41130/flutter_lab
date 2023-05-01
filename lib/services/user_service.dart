@@ -41,22 +41,30 @@ import 'package:injectable/injectable.dart';
 // }
 
 // @Singleton()
+// @injectable
+// class UserService {
+//   late CacheService cacheService;
+
+//   @factoryMethod
+//   create(CacheService cacheService) {
+//     return UserService(cacheService: cacheService);
+//   }
+
+//   @factoryMethod
+//   static create2(CacheService cacheService) {
+//     return UserService(cacheService: cacheService);
+//   }
+
+//   UserService({required this.cacheService}) {
+//     debugPrint('UserService init');
+//   }
+// }
+
 @injectable
 class UserService {
   late CacheService cacheService;
 
-  @factoryMethod
-  create(CacheService cacheService) {
-    return UserService(cacheService: cacheService);
-  }
-
-  @factoryMethod
-  static create2(CacheService cacheService) {
-    return UserService(cacheService: cacheService);
-  }
-
-  UserService({required this.cacheService}) {
-    debugPrint('UserService init');
+  UserService(@factoryParam cacheService) {
+    debugPrint(cacheService.toString());
   }
 }
-

@@ -10,7 +10,7 @@ class TestWidget extends StatelessWidget {
     return ElevatedButton(
       onPressed: () async {
         // await UserService.create(getIt<CacheService>());
-        getIt<UserService>();
+        getIt.get<UserService>(param1: getIt<CacheService>());
       },
       child: const Text('Test Inject')
     );
