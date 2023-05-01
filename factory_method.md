@@ -1,4 +1,4 @@
-- new instance each time access
+- call method right after @factoryMethod
 ```
 @lazySingleton
 class UserService {

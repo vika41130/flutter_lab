@@ -9,7 +9,8 @@ class TestWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return ElevatedButton(
       onPressed: () async {
-        await UserService.create(getIt<CacheService>());
+        // await UserService.create(getIt<CacheService>());
+        getIt<UserService>();
       },
       child: const Text('Test Inject')
     );

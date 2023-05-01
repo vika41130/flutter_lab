@@ -40,12 +40,13 @@ import 'package:injectable/injectable.dart';
 //   instance.dispose();
 // }
 
-@lazySingleton
+// @Singleton()
+@injectable
 class UserService {
   late CacheService cacheService;
 
   @factoryMethod
-  static Future<UserService> create(CacheService cacheService) async {
+  static create(CacheService cacheService) {
     return UserService(cacheService: cacheService);
   }
 
