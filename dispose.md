@@ -1,3 +1,5 @@
+#### when dispose called
+- when scope of instance get disposed
 ##### 2 ways
 - way 1: anotation @disposeMethod
 ```
