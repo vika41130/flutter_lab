@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_lab/services/cache_service.dart';
 import 'package:injectable/injectable.dart';
 
-@injectable
+// @Singleton(signalsReady: true)
+// @singleton
+@lazySingleton
 class UserService {
   // 
   late CacheService cacheService;
