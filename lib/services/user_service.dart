@@ -46,7 +46,12 @@ class UserService {
   late CacheService cacheService;
 
   @factoryMethod
-  static create(CacheService cacheService) {
+  create(CacheService cacheService) {
+    return UserService(cacheService: cacheService);
+  }
+
+  @factoryMethod
+  static create2(CacheService cacheService) {
     return UserService(cacheService: cacheService);
   }
 

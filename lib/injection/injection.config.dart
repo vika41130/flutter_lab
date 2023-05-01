@@ -28,7 +28,7 @@ extension GetItInjectableX on _i1.GetIt {
     );
     gh.lazySingleton<_i3.CacheService>(() => _i3.CacheService());
     gh.factory<_i4.UserService>(
-        () => _i4.UserService.create(gh<_i3.CacheService>()));
+        () => _i4.UserService.create2(gh<_i3.CacheService>()));
     return this;
   }
 }

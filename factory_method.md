@@ -1,4 +1,6 @@
 - call method right after @factoryMethod
+- must have static
+- if no static, call constructor
 ```
 @lazySingleton
 class UserService {
