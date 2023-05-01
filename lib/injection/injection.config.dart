@@ -12,6 +12,9 @@
 import 'package:get_it/get_it.dart' as _i1;
 import 'package:injectable/injectable.dart' as _i2;
 
+import '../services/cache_service.dart' as _i3;
+import '../services/user_service.dart' as _i4;
+
 extension GetItInjectableX on _i1.GetIt {
   // initializes the registration of main-scope dependencies inside of GetIt
   _i1.GetIt init({
@@ -23,6 +26,9 @@ extension GetItInjectableX on _i1.GetIt {
       environment,
       environmentFilter,
     );
+    gh.factory<_i3.CacheService>(() => _i3.CacheService());
+    gh.factory<_i4.UserService>(
+        () => _i4.UserService(cacheService: gh<_i3.CacheService>()));
     return this;
   }
 }

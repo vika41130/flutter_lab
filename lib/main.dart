@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_lab/injection/injection.dart';
+import 'package:flutter_lab/services/services_index.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
@@ -38,8 +39,15 @@ class _MyHomePageState extends State<MyHomePage> {
       appBar: AppBar(
         title: Text(widget.title),
       ),
-      body: const Center(
-        child: Text('Flutter Lab'),
+      body: Center(
+        child: Column(
+          children: [
+            const Text('Flutter Lab'),
+            ElevatedButton(onPressed: () {
+              getIt<UserService>();
+            }, child: const Text('Test Inject')),
+          ],
+        ),
       ),
     );
   }
