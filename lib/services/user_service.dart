@@ -1,7 +1,4 @@
-import 'dart:async';
-
 import 'package:flutter/material.dart';
-import 'package:flutter_lab/services/cache_service.dart';
 import 'package:injectable/injectable.dart';
 
 // @Singleton(signalsReady: true)
@@ -60,11 +57,70 @@ import 'package:injectable/injectable.dart';
 //   }
 // }
 
-@injectable
-class UserService {
-  late CacheService cacheService;
+// @injectable
+// class UserService {
+//   late CacheService cacheService;
 
-  UserService(@factoryParam cacheService) {
-    debugPrint(cacheService.toString());
+//   UserService(@factoryParam cacheService) {
+//     debugPrint(cacheService.toString());
+//   }
+// }
+
+// mixin
+mixin ServiceMixin {
+  String color = 'red';
+  printColor() {
+    debugPrint('ServiceMixin: $color');
   }
 }
+// with mixin
+@Injectable(as: ServiceMixin)
+class UserService with ServiceMixin {
+  
+}
+/* [END mixin] ------------------------------------------------------- */
+
+// abstract
+abstract class ServiceAbstract {
+  late String color;
+  void printColor();
+}
+// implements abstract
+@Injectable(as: ServiceAbstract)
+class UserService2 implements ServiceAbstract {
+  late String _color = 'red';
+  @override
+  get color => _color;
+  @override
+  set color(String color) {
+    _color = color;
+  }
+
+  @override
+  printColor() {
+    debugPrint('ServiceAbstract: $color');
+  }
+}
+/* [END abstract] ------------------------------------------------------- */
+
+// normal
+class ServiceNormal {
+  late String color;
+  void printColor() {}
+}
+@Injectable(as: ServiceNormal)
+class UserService3 extends ServiceNormal {
+  late String _color = 'red';
+  @override
+  get color => _color;
+  @override
+  set color(String color) {
+    _color = color;
+  }
+
+  @override
+  void printColor() {
+    debugPrint('ServiceNormal $color');
+  }
+}
+/* [END normal] ------------------------------------------------------- */

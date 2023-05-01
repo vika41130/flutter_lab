@@ -1,0 +1,2 @@
+- as: cast to a Type
+- common case: abtract Service
