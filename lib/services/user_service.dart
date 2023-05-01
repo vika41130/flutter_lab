@@ -22,20 +22,35 @@ import 'package:injectable/injectable.dart';
 //   }
 // }
 
-@LazySingleton(dispose: disposeUserService)
+// @LazySingleton(dispose: disposeUserService)
+// class UserService {
+//   late CacheService cacheService;
+
+//   UserService({required this.cacheService}) {
+//     debugPrint('UserService init');
+//   }
+
+//   void dispose() {
+//     // dispose stream
+//     debugPrint('UserService dispose');
+//   }
+// }
+
+// FutureOr disposeUserService(UserService instance) {
+//   instance.dispose();
+// }
+
+@lazySingleton
 class UserService {
   late CacheService cacheService;
+
+  @factoryMethod
+  static Future<UserService> create(CacheService cacheService) async {
+    return UserService(cacheService: cacheService);
+  }
 
   UserService({required this.cacheService}) {
     debugPrint('UserService init');
   }
-
-  void dispose() {
-    // dispose stream
-    debugPrint('UserService dispose');
-  }
 }
 
-FutureOr disposeUserService(UserService instance) {
-  instance.dispose();
-}
