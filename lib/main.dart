@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_lab/injection/injection.dart';
-import 'package:flutter_lab/services/services_index.dart';
+import 'package:flutter_lab/widgets/widgets_index.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
@@ -33,6 +33,33 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
+  Future<void> _showMyDialog() async {
+    return showDialog<void>(
+      context: context,
+      barrierDismissible: false, // user must tap button!
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: const Text('AlertDialog'),
+          content: SingleChildScrollView(
+            child: ListBody(
+              children: const <Widget>[
+                TestWidget(),
+              ],
+            ),
+          ),
+          actions: <Widget>[
+            TextButton(
+              child: const Text('Close'),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+            ),
+          ],
+        );
+      },
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -40,15 +67,9 @@ class _MyHomePageState extends State<MyHomePage> {
         title: Text(widget.title),
       ),
       body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            const Text('Flutter Lab'),
-            ElevatedButton(onPressed: () {
-              getIt<UserService>();
-            }, child: const Text('Test Inject')),
-          ],
-        ),
+        child: ElevatedButton(onPressed: () {
+          _showMyDialog();
+        }, child: const Text('Open Dialog')),
       ),
     );
   }
