@@ -66,61 +66,107 @@ import 'package:injectable/injectable.dart';
 //   }
 // }
 
-// mixin
-mixin ServiceMixin {
-  String color = 'red';
-  printColor() {
-    debugPrint('ServiceMixin: $color');
-  }
-}
-// with mixin
-@Injectable(as: ServiceMixin)
-class UserService with ServiceMixin {
+// // mixin
+// mixin ServiceMixin {
+//   String color = 'red';
+//   printColor() {
+//     debugPrint('ServiceMixin: $color');
+//   }
+// }
+// // with mixin
+// @Injectable(as: ServiceMixin)
+// class UserService with ServiceMixin {
   
-}
-/* [END mixin] ------------------------------------------------------- */
+// }
+// /* [END mixin] ------------------------------------------------------- */
 
-// abstract
-abstract class ServiceAbstract {
-  late String color;
-  void printColor();
-}
-// implements abstract
-@Injectable(as: ServiceAbstract)
-class UserService2 implements ServiceAbstract {
-  late String _color = 'red';
-  @override
-  get color => _color;
-  @override
-  set color(String color) {
-    _color = color;
-  }
+// // abstract
+// abstract class ServiceAbstract {
+//   late String color;
+//   void printColor();
+// }
+// // implements abstract
+// @Injectable(as: ServiceAbstract)
+// class UserService2 implements ServiceAbstract {
+//   late String _color = 'red';
+//   @override
+//   get color => _color;
+//   @override
+//   set color(String color) {
+//     _color = color;
+//   }
 
-  @override
-  printColor() {
-    debugPrint('ServiceAbstract: $color');
-  }
-}
-/* [END abstract] ------------------------------------------------------- */
+//   @override
+//   printColor() {
+//     debugPrint('ServiceAbstract: $color');
+//   }
+// }
+// /* [END abstract] ------------------------------------------------------- */
 
-// normal
-class ServiceNormal {
-  late String color;
-  void printColor() {}
-}
-@Injectable(as: ServiceNormal)
-class UserService3 extends ServiceNormal {
-  late String _color = 'red';
-  @override
-  get color => _color;
-  @override
-  set color(String color) {
-    _color = color;
-  }
+// // normal
+// class ServiceNormal {
+//   late String color;
+//   void printColor() {}
+// }
+// @Injectable(as: ServiceNormal)
+// class UserService3 extends ServiceNormal {
+//   late String _color = 'red';
+//   @override
+//   get color => _color;
+//   @override
+//   set color(String color) {
+//     _color = color;
+//   }
 
+//   @override
+//   void printColor() {
+//     debugPrint('ServiceNormal $color');
+//   }
+// }
+// /* [END normal] ------------------------------------------------------- */
+
+abstract class Service {
+  void log();
+}
+
+@Named('serviceIpl')
+@Injectable(as: Service)
+class ServiceIpl implements Service {
   @override
-  void printColor() {
-    debugPrint('ServiceNormal $color');
+  void log() {
+    debugPrint('serviceIpl');
   }
 }
-/* [END normal] ------------------------------------------------------- */
+
+@Named('serviceIpl2')
+@Injectable(as: Service)
+class ServiceIpl2 implements Service {
+  @override
+  void log() {
+    debugPrint('serviceIpl2');
+  }
+}
+
+/* use instance by instanceName 'serviceIpl' */
+// in constructor
+@injectable
+class MyRepo {
+final Service service;
+  MyRepo(@Named('serviceIpl') this.service);
+}
+
+/* implementation class name to instanceName */
+@named
+@Injectable(as: Service)
+class ServiceIpl3 implements Service {
+  @override
+  void log() {
+    debugPrint('ServiceIpl3');
+  }
+}
+
+@injectable
+class MyRepo2 {
+  final Service service;
+  MyRepo2(@Named.from(ServiceIpl3) this.service);
+}

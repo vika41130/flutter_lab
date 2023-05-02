@@ -7,13 +7,23 @@ class TestWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ElevatedButton(
-      onPressed: () async {
-        getIt<ServiceMixin>().printColor();
-        getIt<ServiceAbstract>().printColor();
-        getIt<ServiceNormal>().printColor();
-      },
-      child: const Text('Test Injectable')
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        ElevatedButton(
+          onPressed: () async {
+            getIt<Service>(instanceName: 'serviceIpl').log();
+          },
+          child: const Text('serviceIpl')
+        ),
+        const SizedBox(width: 50,),
+        ElevatedButton(
+          onPressed: () async {
+            getIt<Service>(instanceName: 'serviceIpl2').log();
+          },
+          child: const Text('serviceIpl2')
+        ),
+      ],
     );
   }
 }

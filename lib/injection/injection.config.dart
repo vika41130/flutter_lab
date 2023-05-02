@@ -27,9 +27,22 @@ extension GetItInjectableX on _i1.GetIt {
       environmentFilter,
     );
     gh.lazySingleton<_i3.CacheService>(() => _i3.CacheService());
-    gh.factory<_i4.ServiceAbstract>(() => _i4.UserService2());
-    gh.factory<_i4.ServiceMixin>(() => _i4.UserService());
-    gh.factory<_i4.ServiceNormal>(() => _i4.UserService3());
+    gh.factory<_i4.Service>(
+      () => _i4.ServiceIpl(),
+      instanceName: 'serviceIpl',
+    );
+    gh.factory<_i4.Service>(
+      () => _i4.ServiceIpl2(),
+      instanceName: 'serviceIpl2',
+    );
+    gh.factory<_i4.Service>(
+      () => _i4.ServiceIpl3(),
+      instanceName: 'ServiceIpl3',
+    );
+    gh.factory<_i4.MyRepo>(
+        () => _i4.MyRepo(gh<_i4.Service>(instanceName: 'serviceIpl')));
+    gh.factory<_i4.MyRepo2>(
+        () => _i4.MyRepo2(gh<_i4.Service>(instanceName: 'ServiceIpl3')));
     return this;
   }
 }
