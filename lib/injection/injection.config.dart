@@ -15,6 +15,9 @@ import 'package:injectable/injectable.dart' as _i2;
 import '../services/cache_service.dart' as _i3;
 import '../services/user_service.dart' as _i4;
 
+const String _dev = 'dev';
+const String _test = 'test';
+
 extension GetItInjectableX on _i1.GetIt {
   // initializes the registration of main-scope dependencies inside of GetIt
   _i1.GetIt init({
@@ -29,20 +32,12 @@ extension GetItInjectableX on _i1.GetIt {
     gh.lazySingleton<_i3.CacheService>(() => _i3.CacheService());
     gh.factory<_i4.Service>(
       () => _i4.ServiceIpl(),
-      instanceName: 'serviceIpl',
+      registerFor: {_dev},
     );
     gh.factory<_i4.Service>(
       () => _i4.ServiceIpl2(),
-      instanceName: 'serviceIpl2',
+      registerFor: {_test},
     );
-    gh.factory<_i4.Service>(
-      () => _i4.ServiceIpl3(),
-      instanceName: 'ServiceIpl3',
-    );
-    gh.factory<_i4.MyRepo>(
-        () => _i4.MyRepo(gh<_i4.Service>(instanceName: 'serviceIpl')));
-    gh.factory<_i4.MyRepo2>(
-        () => _i4.MyRepo2(gh<_i4.Service>(instanceName: 'ServiceIpl3')));
     return this;
   }
 }

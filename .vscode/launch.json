@@ -5,19 +5,29 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "name": "flutter_lab",
+            "name": "dev",
             "request": "launch",
             "type": "dart",
-            "program": "lib/main.dart"
+            "program": "lib/main_dev.dart",
+            "args": [
+            ]
         },
         {
-            "name": "flutter_lab (profile mode)",
+            "name": "test",
+            "request": "launch",
+            "type": "dart",
+            "program": "lib/main_test.dart",
+            "args": [
+            ]
+        },
+        {
+            "name": "profile mode",
             "request": "launch",
             "type": "dart",
             "flutterMode": "profile"
         },
         {
-            "name": "flutter_lab (release mode)",
+            "name": "release mode",
             "request": "launch",
             "type": "dart",
             "flutterMode": "release"

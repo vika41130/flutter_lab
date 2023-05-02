@@ -12,16 +12,9 @@ class TestWidget extends StatelessWidget {
       children: [
         ElevatedButton(
           onPressed: () async {
-            getIt<Service>(instanceName: 'serviceIpl').log();
+            getIt<Service>().log();
           },
-          child: const Text('serviceIpl')
-        ),
-        const SizedBox(width: 50,),
-        ElevatedButton(
-          onPressed: () async {
-            getIt<Service>(instanceName: 'serviceIpl2').log();
-          },
-          child: const Text('serviceIpl2')
+          child: const Text('Call Service')
         ),
       ],
     );
