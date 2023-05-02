@@ -13,10 +13,13 @@ import 'package:get_it/get_it.dart' as _i1;
 import 'package:injectable/injectable.dart' as _i2;
 
 import '../services/cache_service.dart' as _i3;
-import '../services/user_service.dart' as _i4;
+import '../services/service.dart' as _i4;
 
-const String _dev = 'dev';
-const String _test = 'test';
+const String _vietnam = 'vietnam';
+const String _malaysia = 'malaysia';
+const String _indonesia = 'indonesia';
+const String _china = 'china';
+const String _japan = 'japan';
 
 extension GetItInjectableX on _i1.GetIt {
   // initializes the registration of main-scope dependencies inside of GetIt
@@ -31,12 +34,19 @@ extension GetItInjectableX on _i1.GetIt {
     );
     gh.lazySingleton<_i3.CacheService>(() => _i3.CacheService());
     gh.factory<_i4.Service>(
-      () => _i4.ServiceIpl(),
-      registerFor: {_dev},
+      () => _i4.SoutheastAsia(),
+      registerFor: {
+        _vietnam,
+        _malaysia,
+        _indonesia,
+      },
     );
     gh.factory<_i4.Service>(
-      () => _i4.ServiceIpl2(),
-      registerFor: {_test},
+      () => _i4.EastAsia(),
+      registerFor: {
+        _china,
+        _japan,
+      },
     );
     return this;
   }

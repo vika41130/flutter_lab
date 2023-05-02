@@ -5,18 +5,18 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "name": "dev",
+            "name": "Vietnam",
             "request": "launch",
             "type": "dart",
-            "program": "lib/main_dev.dart",
+            "program": "lib/main_vietnam.dart",
             "args": [
             ]
         },
         {
-            "name": "test",
+            "name": "China",
             "request": "launch",
             "type": "dart",
-            "program": "lib/main_test.dart",
+            "program": "lib/main_china.dart",
             "args": [
             ]
         },

@@ -1,24 +1,28 @@
 import 'package:flutter/foundation.dart';
+import 'package:flutter_lab/injection/country.dart';
 import 'package:injectable/injectable.dart';
 
 abstract class Service {
   void log();
 }
 
-@Environment('dev')
+@vietnam
+@malaysia
+@indonesia
 @Injectable(as: Service)
-class ServiceIpl implements Service {
+class SoutheastAsia implements Service {
   @override
   void log() {
-    debugPrint('ServiceIpl dev');
+    debugPrint('SoutheastAsia');
   }
 }
 
-@Environment('test')
+@china
+@japan
 @Injectable(as: Service)
-class ServiceIpl2 implements Service {
+class EastAsia implements Service {
   @override
   void log() {
-    debugPrint('ServiceIpl2 test');
+    debugPrint('EastAsia');
   }
 }
