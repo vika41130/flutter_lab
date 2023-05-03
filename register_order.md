@@ -1,0 +1,5 @@
+- order register dependency
+- default is 0
+- negative before everything
+- positive after everything
+- order generate in injection.config.dart
