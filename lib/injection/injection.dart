@@ -28,8 +28,8 @@ void initEastAsiaScope() {
   getIt.initEastAsiaScope(dispose: beforeDisposeEastAsia);
 }
 FutureOr<dynamic> beforeDisposeSoutheastAsia() {
-  debugPrint('beforeDisposeSoutheastAsia');
+  debugPrint('SoutheastAsia Dispose: run first function');
 }
 FutureOr<dynamic> beforeDisposeEastAsia() {
-  debugPrint('beforeDisposeEastAsia');
+  debugPrint('EastAsia Dispose: run first function');
 }

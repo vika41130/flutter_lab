@@ -61,6 +61,10 @@ extension GetItInjectableX on _i1.GetIt {
       'SoutheastAsia',
       dispose: dispose,
       init: (_i2.GetItHelper gh) {
+        gh.lazySingleton<_i5.Demo>(
+          () => _i5.Demo(),
+          dispose: _i5.disposeDemo,
+        );
         gh.factory<_i6.SoutheastAsiaWidget>(() => _i6.SoutheastAsiaWidget());
       },
     );

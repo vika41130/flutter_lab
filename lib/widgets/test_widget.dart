@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_lab/injection/injection.dart';
+import 'package:flutter_lab/services/services_index.dart';
 import 'package:flutter_lab/widgets/widgets_index.dart';
 
 class TestWidget extends StatelessWidget {
@@ -17,6 +18,7 @@ class TestWidget extends StatelessWidget {
               onPressed: () async {
                 initSoutheastAsiaScope();
                 getIt<SoutheastAsiaWidget>().log();
+                getIt<Demo>();
               },
               child: const Text('Push SoutheastAsia Scope')
             ),

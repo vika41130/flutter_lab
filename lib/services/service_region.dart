@@ -1,5 +1,6 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter_lab/injection/country.dart';
+import 'package:flutter_lab/injection/scope.dart';
 import 'package:injectable/injectable.dart';
 
 abstract class Service {
@@ -25,4 +26,13 @@ class EastAsia implements Service {
   void log() {
     debugPrint('EastAsia');
   }
+}
+
+@southeastAsia
+// @Singleton(dispose: disposeDemo)
+@LazySingleton(dispose: disposeDemo)
+class Demo {}
+void disposeDemo(Demo instance) {
+  // dispose stream
+  debugPrint('disposeDemo: $instance');
 }
