@@ -1,0 +1,4 @@
+- Injectable Scope same as Navigator.push
+- new scope is pushed will be active
+- default is baseScope
+- baseScope cannot be pop

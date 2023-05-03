@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_lab/stream/injectable_scope_change.dart';
 import 'package:flutter_lab/widgets/widgets_index.dart';
+
+import 'injection/injection.dart';
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
@@ -26,15 +29,25 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.title),
       ),
-      body: const Center(
-        child: TestWidget(),
+      body: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          StreamBuilder<Object>(
+            stream: getIt<InjectableScopeChangeStream>().stream,
+            builder: (context, snapshot) {
+              return Text('Current Scope Name: ${getIt.currentScopeName}');
+            }
+          ),
+          const Spacer(),
+          const TestWidget(),
+          const Spacer(),
+        ],
       ),
     );
   }

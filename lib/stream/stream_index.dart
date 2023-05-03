@@ -1,0 +1,1 @@
+export 'injectable_scope_change.dart';

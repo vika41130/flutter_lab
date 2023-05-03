@@ -26,12 +26,3 @@ class EastAsia implements Service {
     debugPrint('EastAsia');
   }
 }
-
-// @Order(-1)
-@Injectable(order: -1)  
-class Service2 {}
-
-
-// @Order(-1)
-@Injectable(order: 1)  
-class Service3 {}
