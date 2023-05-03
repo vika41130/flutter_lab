@@ -3,6 +3,5 @@ import 'injection/injection.dart';
 
 void setUp() {
   configureDependencies();
-  // registerScope();
   configureInjectableScopeChange();
 }

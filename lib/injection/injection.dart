@@ -19,20 +19,17 @@ void configureEnvironment(String env) {
 )
 // baseScope (default)
 void configureDependencies() async => getIt.init(environment: environment);
-// scope
-void registerScope() { // pushNewScope when call initScope
-  // initSoutheastAsiaScope();
-  // initEastAsiaScope();
-}
+// others scope
+// pushNewScope when call initScope
 void initSoutheastAsiaScope() {
-  getIt.initSoutheastAsiaScope(dispose: afterDisposeSoutheastAsia);
+  getIt.initSoutheastAsiaScope(dispose: beforeDisposeSoutheastAsia);
 }
 void initEastAsiaScope() {
-  getIt.initEastAsiaScope(dispose: afterDisposeEastAsia);
+  getIt.initEastAsiaScope(dispose: beforeDisposeEastAsia);
 }
-FutureOr<dynamic> afterDisposeSoutheastAsia() {
-  debugPrint('afterDisposeSoutheastAsia');
+FutureOr<dynamic> beforeDisposeSoutheastAsia() {
+  debugPrint('beforeDisposeSoutheastAsia');
 }
-FutureOr<dynamic> afterDisposeEastAsia() {
-  debugPrint('afterDisposeEastAsia');
+FutureOr<dynamic> beforeDisposeEastAsia() {
+  debugPrint('beforeDisposeEastAsia');
 }
