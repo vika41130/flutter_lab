@@ -8,7 +8,7 @@
             "name": "Vietnam",
             "request": "launch",
             "type": "dart",
-            "program": "lib/main_vietnam.dart",
+            "program": "app/lib/main_vietnam.dart",
             "args": [
             ]
         },
@@ -16,7 +16,7 @@
             "name": "China",
             "request": "launch",
             "type": "dart",
-            "program": "lib/main_china.dart",
+            "program": "app/lib/main_china.dart",
             "args": [
             ]
         },
