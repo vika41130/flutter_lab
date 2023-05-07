@@ -1,0 +1,3 @@
+- @injectable or @singleton @lazySingleton
+- third party type
+- a abstract/class to instance Third Party type or user-defined class
