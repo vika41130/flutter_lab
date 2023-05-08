@@ -1,0 +1,6 @@
+- for statefull widget
+- initState: subscribe resource
+- didUpdateWidget: unsubscribe old object if replacing object
+- dispose: unsubscribe resource
+- super.initState() first, call super.dispose() last
+- be aware of disposing resources when using third party module, ...
