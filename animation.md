@@ -1,0 +1,23 @@
+- AnimationController: is enough
+- duration: forward
+- reverseDuration: reverse
+- value: initial value
+- controller.value - state of Animation Controller
+- lowerBound: min value, upperBound: max value
+- addListener, addStatusListener
+- lowerBound ≤ upperBound
+- AnimationStatus: dismissed, forward, reverse, completed
+##### method
+- forward, reverse, stop, reset
+- stop: does not trigger notification
+- dispose: release, ticker = null, cannot call other method
+- controller.value = val, set to val
+- isAnimating: whether animation is animating
+- lastElapsedDuration: time elapsed
+- animateTo: animate forward to specific position 
+- animateBack: animate reverse
+- repeat forward: from min to max
+- repeat reverse: two-direction
+##### animation
+- hold value
+- modify value follow a specific method
