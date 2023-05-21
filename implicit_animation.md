@@ -1,9 +1,7 @@
-- Align -> AnimatedAlign
-- Container -> AnimatedContainer
-- DefaultTextStyle -> AnimatedDefaultTextStyle
-- Opacity -> AnimatedOpacity
-- PhysicalModel -> AnimatedPhysicalModel
-- Positioned -> AnimatedPositioned
-- PositionDirectional -> AnimatedPositionDirectional
-- Theme -> AnimatedThemeSize -> AnimatedSize
-- 
+- https://api.flutter.dev/flutter/widgets/ImplicitlyAnimatedWidget-class.html
+- all implicit widgets extend abstract ImplicitlyAnimatedWidget
+- animating when property change
+- be aware of: each widget has corresponding animation widget
+- Tween used in TweenAnimationBuilder
+- Ref: https://api.flutter.dev/flutter/widgets/ImplicitlyAnimatedWidget-class.html
+- Tween types: https://api.flutter.dev/flutter/animation/Tween-class.html
